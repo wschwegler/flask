@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, send_file, redirect, url_for
 import pandas as pd
 import os
 
@@ -7,6 +7,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 MERGED_FOLDER = 'merged_files'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MERGED_FOLDER'] = MERGED_FOLDER
 app.config['ALLOWED_EXTENSIONS'] = {'csv'}
 
 # Check if the file has a valid extension
@@ -15,6 +16,7 @@ def allowed_file(filename):
 
 # Ensure necessary folders exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(MERGED_FOLDER, exist_ok=True)
 
 @app.route('/')
 def upload_form():
@@ -41,14 +43,14 @@ def upload_files():
             return f"Invalid file format for {file.filename}."
 
     try:
-        # Load files into DataFrames (but we don't merge them)
+        # Load files into DataFrames
         df1 = pd.read_csv(saved_files[0])
         df2 = pd.read_csv(saved_files[1])
     except Exception as e:
         return f"Error reading CSV files: {str(e)}"
 
-    # Redirect to download the first file that was uploaded
-    return send_file(saved_files[0], as_attachment=True)
+    # Redirect to the download page with the first uploaded file (df1)
+    return redirect(url_for('download_file', filename=files[0].filename))
 
 @app.route('/download/<filename>')
 def download_file(filename):
@@ -59,4 +61,4 @@ def download_file(filename):
         return "File not found.", 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
