@@ -49,10 +49,13 @@ def upload_files():
     except Exception as e:
         return f"Error reading CSV files: {str(e)}"
 
+    merged_file_path = os.path.join(app.config['MERGED_FOLDER'], 'df1.csv')
+    df1.to_csv(merged_file_path, index=False)
+
     # Redirect to the download page with the first uploaded file (df1)
     return render_template('result.html', 
                            message="Files have been successfully merged.",
-                           download_link='/download/' + filename=files[0].filename)
+                           download_link='/download/df1.csv')
 
 @app.route('/download/<filename>')
 def download_file(filename):
