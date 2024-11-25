@@ -3,110 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload CSV Files</title>
+    <title>Upload School District Files</title>
     <style>
-        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            color: #333;
+            margin: 0;
         }
-
-        /* Container */
         .container {
             background: #fff;
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
-
-        /* Header */
-        h1 {
-            font-size: 1.8rem;
             text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        h1 {
             margin-bottom: 20px;
-            color: #444;
+            font-size: 1.5rem;
         }
-
-        /* Instructions */
-        .instructions {
-            font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
+        label, p {
+            font-size: 1rem;
+            margin: 10px 0;
         }
-
-        .instructions strong {
-            color: #333;
-        }
-
-        /* Input Styles */
         input[type="file"] {
             display: block;
-            margin-top: 10px;
-            padding: 5px;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            color: #555;
+            margin: 10px 0;
         }
-
-        /* Button */
         button {
-            display: block;
-            width: 100%;
-            background-color: #FF7043;
-            color: white;
+            padding: 10px 20px;
             font-size: 1rem;
-            padding: 10px;
-            margin-top: 20px;
+            background-color: #FF7043;
             border: none;
             border-radius: 5px;
+            color: white;
             cursor: pointer;
-            transition: background-color 0.3s;
+            margin-top: 20px;
         }
-
         button:hover {
-            background-color: #FF7043;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-            .instructions {
-                font-size: 0.85rem;
-            }
+            background-color: #ff5722;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Upload CSV Files</h1>
-        <p class="instructions">
-            Please select the CSV files in the following order:
-            <ol>
-                <li><strong>PropertyTax_DataSet_2019-20_to_2023-24_20240421_V1</strong></li>
-                <li><strong>PropertyTax_DataSet_20190513</strong></li>
-                <li><strong>school-districts_lea_directory</strong></li>
-                <li><strong>districts_ccd_finance</strong></li>
-            </ol>
-            Please upload all files at once in the specified order for proper processing.
-        </p>
+        <h1>Upload School District Files</h1>
+        <p>Please upload the following two CSV files:</p>
+        <ol>
+            <li><strong>school-districts_lea_directory</strong></li>
+            <li><strong>districts_ccd_finance</strong></li>
+        </ol>
         <form action="/upload" method="POST" enctype="multipart/form-data">
-            <label for="files">Select CSV files:</label>
+            <label for="files">Select Files:</label>
             <input type="file" name="files[]" id="files" accept=".csv" multiple required>
-            <button type="submit">Upload and View Data</button>
+            <button type="submit">Upload and Merge</button>
         </form>
     </div>
 </body>
