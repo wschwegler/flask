@@ -49,8 +49,8 @@ def upload_files():
     try:
         df1 = pd.read_csv(saved_files[0])
         df2 = pd.read_csv(saved_files[1])
-        df3 = pd.read_csv(saved_files[2])
-        df4 = pd.read_csv(saved_files[3])
+        #df3 = pd.read_csv(saved_files[2])
+        #df4 = pd.read_csv(saved_files[3])
     except Exception as e:
         return f"Error reading CSV files: {str(e)}"
 
