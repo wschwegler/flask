@@ -63,6 +63,10 @@ def upload_files():
     lea_directory['year'] = lea_directory['year'].astype(str)
     ccd_finance['year'] = ccd_finance['year'].astype(str)
 
+    # Filter data to include only rows from 2016 onward
+    lea_directory = lea_directory[lea_directory['year'].astype(int) >= 2016]
+    ccd_finance = ccd_finance[ccd_finance['year'].astype(int) >= 2016]
+
     # Best match merge based on 'leaid' and 'year'
     counter = 0
     merged_df2 = pd.DataFrame(columns=lea_columns + finance_columns)
