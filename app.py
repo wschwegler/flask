@@ -50,7 +50,9 @@ def upload_files():
         return f"Error reading CSV files: {str(e)}"
 
     # Redirect to the download page with the first uploaded file (df1)
-    return redirect(url_for('download_file', filename=files[0].filename))
+    return render_template('result.html', 
+                           message="Files have been successfully merged.",
+                           download_link='/download/' + filename=files[0].filename)
 
 @app.route('/download/<filename>')
 def download_file(filename):
