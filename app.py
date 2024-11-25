@@ -64,6 +64,7 @@ def upload_files():
     ccd_finance['year'] = ccd_finance['year'].astype(str)
 
     # Best match merge based on 'leaid' and 'year'
+    counter = 0
     merged_df2 = pd.DataFrame(columns=lea_columns + finance_columns)
     for _, row in lea_directory.iterrows():
         target_leaid = row['leaid']
@@ -79,6 +80,8 @@ def upload_files():
                 best_match = candidate
 
         if best_match is not None:
+            counter += 1
+            print(counter)
             new_row = pd.concat([row, best_match]).to_frame().T
             merged_df2 = pd.concat([merged_df2, new_row], ignore_index=True)
 
